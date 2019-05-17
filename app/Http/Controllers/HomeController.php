@@ -173,7 +173,7 @@ class HomeController extends Controller
         $result = Post::leftJoin('categories', 'categories.category_id', '=', 'posts.post_category')
             ->where('posts.post_publish_status', true)
             ->orderBy('post_id', 'DESC')
-            ->limit(30)
+            ->limit(50)
             ->get();
 
         return view('frontend.index')->with('news', $result);

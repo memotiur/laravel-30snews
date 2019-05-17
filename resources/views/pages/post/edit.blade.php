@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create User')
+@section('title', 'Update Post')
 
 
 @section('content')
@@ -29,7 +29,7 @@
             </div>
         @endif
         <div class="panel panel-default">
-            <div class="panel-heading">New Post</div>
+            <div class="panel-heading">Update Post</div>
 
             <div class="panel-body">
 
