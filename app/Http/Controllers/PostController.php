@@ -22,14 +22,11 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        //return $date = date('y/m/d');
-        //return $request->all();
+
+         $request->all();
         unset($request['_token']); //Remove Token
 
         if ($request->hasFile('image')) {
-            $this->validate($request, [
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
-            ]);
             $image = $request->file('image');
             $image_name = time() . '.' . $image->getClientOriginalExtension();
             $image_name = $date = date('y/m/d/') . $image_name;
@@ -40,6 +37,7 @@ class PostController extends Controller
         }
         $request->request->add(['post_image' => $image_name]);
 
+        //return $request->all();
         try {
             Post::create($request->except('image'));
             return back()->with('success', "Post created");

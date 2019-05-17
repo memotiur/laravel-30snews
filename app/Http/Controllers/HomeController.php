@@ -170,7 +170,7 @@ class HomeController extends Controller
     }
     public function homepage()
     {
-        $result = Post::join('categories', 'categories.category_id', '=', 'posts.post_category')
+        $result = Post::leftJoin('categories', 'categories.category_id', '=', 'posts.post_category')
             ->where('posts.post_publish_status', true)
             ->orderBy('post_id', 'DESC')
             ->limit(30)

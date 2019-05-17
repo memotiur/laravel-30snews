@@ -76,9 +76,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        {{--  <img class="img-thumbnail featured-image"
-                                               src="http://www.3forty.media/cannix/wp-content/uploads/2018/03/clem-onojeghuo-127166-unsplash-1-500x333.jpg ">--}}
-                                        <img class="img-thumbnail featured-image"
+                                       <img class="img-thumbnail featured-image"
                                              src="/images/post/{{$post->post_image}}">
                                     </div>
                                     <div class="col-md-8">
@@ -111,8 +109,7 @@
                                             <p>{{$post->post_description}}</p>
                                         </div>
                                         <div class="news-buttons">
-                                            <!--  <button type="button" class="btn btn-outline-danger btn-sm">Read More</button>-->
-                                            <small>আরো পড়ুন <span><a href="http://{{$post->post_source_url}}"
+                                            <small>আরো পড়ুন <span><a href="@if(substr( $post->post_source_url, 0, 4 ) === "http") {{$post->post_source_url}} @else http://{{$post->post_source_url}} @endif"
                                                                      target="_BLANK">{{$post->post_source_name}}</a>  </span>
                                             </small>
                                         </div>
@@ -123,120 +120,9 @@
                     </div>
                 </div>
             @endforeach
-            @foreach($news as $post)
-                <div class="row mb-2">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        {{--  <img class="img-thumbnail featured-image"
-                                               src="http://www.3forty.media/cannix/wp-content/uploads/2018/03/clem-onojeghuo-127166-unsplash-1-500x333.jpg ">--}}
-                                        <img class="img-thumbnail featured-image"
-                                             src="/images/post/{{$post->post_image}}">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="news-title">
-                                            <h5>{{$post->post_headline}}</h5>
-                                        </div>
-                                        <div class="news-cats">
-                                            <ul class="list-unstyled list-inline mb-1">
-                                                <li class="list-inline-item">
-                                                    <i class="fa fa-folder text-danger"></i>
-                                                    <a href="/category/{{$post->category_name}}">
-                                                        <small class="badge badge-danger">{{$post->category_name}}</small>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <i class="fa fa-user text-danger"></i>
-                                                    <a href="#">
-                                                        <small>মতিউর রহমান</small>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <i class="fa fa-calendar text-danger"></i>
-                                                    <small>{{$post->created_at}}</small>
-                                                </li>
-
-
-                                            </ul>
-                                        </div>
-                                        <div class="news-content">
-                                            <p>{{$post->post_description}}</p>
-                                        </div>
-                                        <div class="news-buttons">
-                                            <!--  <button type="button" class="btn btn-outline-danger btn-sm">Read More</button>-->
-                                            <small>আরো পড়ুন <span><a href="http://{{$post->post_source_url}}"
-                                                                     target="_BLANK">{{$post->post_source_name}}</a>  </span>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-            {{--  <div class="row mb-2">
-                  <div class="col-md-12">
-                      <div class="card">
-                          <div class="card-body">
-                              <div class="row">
-                                  <div class="col-md-4">
-                                      <img class="img-thumbnail featured-image"
-                                           src="https://assets.inshorts.com/inshorts/images/v1/variants/jpg/s/2018/12_dec/16_sun/img_1544938405481_908.jpg">
-                                  </div>
-                                  <div class="col-md-8">
-                                      <div class="news-title">
-                                          <h5>Uneasy no settle whence nature narrow in afraid</h5>
-                                      </div>
-                                      <div class="news-cats">
-                                          <ul class="list-unstyled list-inline mb-1">
-                                              <li class="list-inline-item">
-                                                  <i class="fa fa-folder-o text-danger"></i>
-                                                  <a href="#">
-                                                      <small class="badge badge-success">Entertainment</small>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <i class="fa fa-folder-o text-danger"></i>
-                                                  <a href="#">
-                                                      <small>Motiur Rahaman</small>
-                                                  </a>
-                                              </li>
-                                              <li class="list-inline-item">
-                                                  <i class="fa fa-folder-o text-danger"></i>
-                                                  <small>4th July 2018</small>
-                                              </li>
-
-
-                                          </ul>
-                                      </div>
-                                      <div class="news-content">
-                                          <p>American singer Ariana Grande's ex-fiancé, comedian Pete Davidson on Saturday
-                                              wrote 'I really don't want to be on this earth anymore' on Instagram before
-                                              deleting his account. His post came after Ariana joked about Kanye West's
-                                              tweets discussing mental health. Davidson had spoken about mental health in
-                                              the past, and recently released a statement addressing bullying and
-                                              Borderline Personality Disorder. </p>
-                                      </div>
-                                      <div class="news-buttons">
-                                          <!--  <button type="button" class="btn btn-outline-danger btn-sm">Read More</button>-->
-                                          <small>Read More <span><a href="#">Bangla Tribune</a>  </span></small>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>--}}
-            <div class="row mb-2">
-                <div class="col-md-3 mx-auto">
-                    <button type="button" class="btn btn-outline-success mx-auto"><i class="fa fa-spinner"></i> More
-                    </button>
-                </div>
-            </div>
         </div>
+
+
         <div class="col-md-3">
             <div class="row">
                 <div class="col-md-12">

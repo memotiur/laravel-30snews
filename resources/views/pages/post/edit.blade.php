@@ -47,14 +47,14 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
-                        <label class="col-lg-2 control-label">Details</label>
+                        <label class="col-lg-2 control-label">Details <p style="color: red">Word: <span id="counter">0</span></p></label>
                         <div class="col-lg-10">
-                            <textarea class="form-control datepicker" name="post_description"
-                                      rows="14">{{$post->post_description}}</textarea>
+                            <textarea class="form-control" name="post_description" rows="14" onkeyup="countWord(this)">{{$post->post_description}}</textarea>
                         </div>
                     </div>
+
+
                     <div class="form-group">
                         <label class="col-lg-2 control-label">Category</label>
                         <div class="col-lg-10">
@@ -77,6 +77,20 @@
 
 
                     <div class="form-group">
+                        <label class="col-lg-2 control-label">Source Name</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" name="post_source_name" value="{{$post->post_source_name}}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Url</label>
+                        <div class="col-lg-10">
+                            <textarea type="text" class="form-control" name="post_source_url">{{$post->post_source_url}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <div class="col-lg-offset-2 col-lg-10">
                             <button type="submit" class="btn btn-sm btn-primary">Save</button>
                         </div>
@@ -87,17 +101,19 @@
 
     </div>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.js"></script>
 
     <script type="text/javascript">
-        $('.datepicker').datepicker({
-            weekStart: 1,
-            daysOfWeekHighlighted: "6,0",
-            autoclose: true,
-            todayHighlight: true,
-        });
-        $('.datepicker').datepicker("setDate", new Date());
+        let counter=0;
+        function countWord(param) {
+
+            var spaceCount = (param.value.split(" ").length - 1);
+            console.log(spaceCount);
+            if(spaceCount>60){
+                toastr.warning('Word limit Exceed! Remove '+(spaceCount-60)+" Word")
+            }
+            document.getElementById("counter").textContent=spaceCount;
+        }
+
+
     </script>
 @endsection
