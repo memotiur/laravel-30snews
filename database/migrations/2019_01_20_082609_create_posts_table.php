@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
             $table->string('post_language')->nullable();
             $table->string('country')->nullable();
             $table->string('post_source_name')->default('30SNews');
-            $table->string('post_author_name')->nullable();
+            $table->unsignedBigInteger('post_author_id')->nullable();
             $table->dateTime('post_schedule_post')->nullable();
             $table->boolean('post_publish_status')->default(true);
             $table->timestamps();

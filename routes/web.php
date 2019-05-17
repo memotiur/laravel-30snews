@@ -12,6 +12,8 @@
 */
 
 
+use App\Post;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -34,24 +36,18 @@ Route::get('/admin-home', function () {
     if (!Auth::check()) {
         return view('login');
     } else {
-        $unseen_notifications = \App\User::get();
-        /*        $unseen_replacement_notifications = \App\Leave::join('users', 'users.id', '=', 'leaves.replacement_person_id')->where('leaves.replacement_person_id', Session::get('id'))->where('replacement_person_agreement', 0)->get();*/
-        $unseen_replacement_notifications = null;
-        $user_count = \App\User::count();
-        $leave_count = 5;
-        $pending = 0;
-        $accepted = 3;
-        $failed = 1;
-        /*        $all_leave_request = \App\Leave::join('users', 'users.id', '=', 'leaves.user_id')->get();*/
-        $all_leave_request = \App\User::get();
+        $unseen_notifications = User::get();
+       $unseen_replacement_notifications = null;
+        $posts = Post::count();
+        $authors = User::count();
+        $published_count = Post::where('post_publish_status',true)->count();
+        $all_post = Post::orderBy('created_at','DESC')->limit(10)->get();
         return view('pages.home.index')
             ->with('unseen_notifications', $unseen_notifications)
-            ->with('user_count', $user_count)
-            ->with('leave_count', $leave_count)
-            ->with('accepted', $accepted)
-            ->with('pending', $pending)
-            ->with('failed', $failed)
-            ->with('all_leave_request', $all_leave_request)
+            ->with('posts', $posts)
+            ->with('authors', $authors)
+            ->with('published_count', $published_count)
+            ->with('all_post', $all_post)
             ->with('unseen_replacement_notifications', $unseen_replacement_notifications);
     }
 
@@ -95,8 +91,10 @@ Route::group([], function () {
 //General
 Route::get('/', 'HomeController@homepage');
 Route::get('/category/{cat_name}', 'HomeController@categoryPost');
+Route::get('/author/{aut_id}', 'HomeController@authorPost');
 Route::get('/privacy', 'HomeController@privacy');
 Route::get('/terms-and-condition', 'HomeController@terms');
+Route::get('/contact', 'HomeController@contact');
 
 
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 
 class PostController extends Controller
 {
@@ -36,6 +38,7 @@ class PostController extends Controller
             $image_name = $request['image'];
         }
         $request->request->add(['post_image' => $image_name]);
+        $request->request->add(['post_author_id' => Session::get('id')]);
 
         //return $request->all();
         try {

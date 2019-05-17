@@ -170,23 +170,87 @@ class HomeController extends Controller
     }
     public function homepage()
     {
-        $result = Post::leftJoin('categories', 'categories.category_id', '=', 'posts.post_category')
+          $result = Post::leftJoin('categories', 'categories.category_id', '=', 'posts.post_category')
+            ->leftJoin('users', 'users.id', '=', 'posts.post_author_id')
             ->where('posts.post_publish_status', true)
-            ->orderBy('post_id', 'DESC')
+            ->orderBy('posts.post_id', 'DESC')
             ->limit(50)
-            ->get();
+            ->get(
+                [
+                    'posts.post_headline',
+                    'posts.post_description',
+                    'posts.post_image',
+                    'posts.post_source_url',
+                    'posts.post_language',
+                    'posts.post_source_name',
+                    'posts.created_at',
+                    'posts.updated_at',
+
+                    'categories.category_name',
+                    'users.name',
+                    'users.id',
+                ]
+
+            );
 
         return view('frontend.index')->with('news', $result);
     }
 
     public function categoryPost($category_name)
     {
-        $result = Post::join('categories', 'categories.category_id', '=', 'posts.post_category')
+        $result = Post::leftJoin('categories', 'categories.category_id', '=', 'posts.post_category')
+            ->leftJoin('users', 'users.id', '=', 'posts.post_author_id')
             ->where('posts.post_publish_status', true)
             ->where('categories.category_name', 'like', '%' . $category_name . '%')
-            ->orderBy('post_id', 'DESC')
-            ->limit(20)
-            ->get();
+            ->orderBy('posts.post_id', 'DESC')
+            ->limit(50)
+            ->get(
+                [
+                    'posts.post_headline',
+                    'posts.post_description',
+                    'posts.post_image',
+                    'posts.post_source_url',
+                    'posts.post_language',
+                    'posts.post_source_name',
+                    'posts.created_at',
+                    'posts.updated_at',
+
+                    'categories.category_name',
+                    'users.name',
+                    'users.id',
+                ]
+
+            );
+
+
+        return view('frontend.index')->with('news', $result);
+    }
+
+    public function authorPost($author_id)
+    {
+        $result = Post::leftJoin('categories', 'categories.category_id', '=', 'posts.post_category')
+            ->leftJoin('users', 'users.id', '=', 'posts.post_author_id')
+            ->where('posts.post_publish_status', true)
+            ->where('posts.post_author_id', $author_id)
+            ->orderBy('posts.post_id', 'DESC')
+            ->limit(50)
+            ->get(
+                [
+                    'posts.post_headline',
+                    'posts.post_description',
+                    'posts.post_image',
+                    'posts.post_source_url',
+                    'posts.post_language',
+                    'posts.post_source_name',
+                    'posts.created_at',
+                    'posts.updated_at',
+
+                    'categories.category_name',
+                    'users.name',
+                    'users.id',
+                ]
+
+            );
 
         return view('frontend.index')->with('news', $result);
     }
@@ -199,6 +263,11 @@ class HomeController extends Controller
     public function terms()
     {
         return view('frontend.terms');
+    }
+
+    public function contact()
+    {
+        return view('frontend.contact');
     }
 
 }
