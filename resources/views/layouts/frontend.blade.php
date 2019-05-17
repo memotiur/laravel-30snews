@@ -83,8 +83,9 @@
 
 
                 <p style="text-align: left">
-                    Tolarbgah</br>
-                    Mirpur-1, Dhaka
+                    Concord Regency<br>
+                    19/1 Panthapath (1st Floor)<br>
+                    Dhaka 1205
                 </p>
             </div>
             <div class="col-md-4">
